@@ -45,8 +45,25 @@ async function setName (chat_id, name) {
     return await db.updateOne({ chat_id }, { name })
 }
 
+async function setName (chat_id, name) {
+    let db = await UserModel()
+    return await db.updateOne({ chat_id }, { name })
+}
+
+async function setAge (chat_id, age) {
+    let db = await UserModel()
+    return await db.updateOne({ chat_id }, { age })
+}
+
+async function changeStep (chat_id, step) {
+    let db = await UserModel()
+    return await db.updateOne({ chat_id }, { step })
+}
+
 module.exports = {
     findUser,
     createUser,
-    setName
+    setName,
+    changeStep,
+    setAge
 }
