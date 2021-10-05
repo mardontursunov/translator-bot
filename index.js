@@ -6,7 +6,7 @@ const bot = new TelegramBot(process.env.BOT_TOKEN, {
     polling: true
 });
 
-const { createUser, findUser } = require('./model')
+const { createUser, findUser, setName } = require('./model')
 
 bot.on('message', async (message) => {
     const chat_id = message.chat.id
@@ -21,8 +21,13 @@ bot.on('message', async (message) => {
     if(!user) {
         await createUser(chat_id)
         await bot.sendMessage(chat_id, "Salom mehmon, ismingizni kiriting!")
-    } else {
-        bot.sendMessage(chat_id, text)
+    } else if (user.step == 1) {
+        try {
+            await setName(chat_id, text.trim())
+            await bot.sendMessage(chat_id, `Barakalloh ${text}, endi yoshingizni kiriting?`)
+        } catch (error) {
+            bot.sendMessage(chat_id, "Qandaydir xato qildingiz!")
+        }
     }
 
 });
