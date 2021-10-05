@@ -37,5 +37,6 @@ async function setText (chat_id, text) {
 
 module.exports = {
     findUser,
-    createUser
+    createUser,
+    setText
 }

@@ -1,5 +1,5 @@
 const bot = require('./bot')
-const translate = 
+const translate = require('@vitalets/google-translate-api')
 const { findUser, createUser, setText } = require('./model')
 
 bot.on('message', async (message) => {
@@ -55,6 +55,12 @@ bot.on('callback_query', async (query) => {
 
     let user = await findUser(chat_id)
 
+    let translatedWord = await translate(text, { to: data })
+
+    await bot.editMessageText(translatedWord.text, {
+        chat_id,
+        message_id: query.message.message_id
+    })
 
 
 })
