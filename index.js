@@ -16,7 +16,6 @@ bot.on('message', async (message) => {
 
     let user = await findUser(chat_id)
 
-    console.log(user);
 
     if(!user) {
         await createUser(chat_id)
@@ -35,8 +34,10 @@ bot.on('message', async (message) => {
             await changeStep(chat_id, 3)
             await bot.sendMessage(chat_id, "Tanishganimdan xursandman. Siz ro'yxatdan o'tdingiz!")
         } catch (error) {
-
+            bot.sendMessage(chat_id, "Qandaydir xato qildingiz!")
         }
+    } else {
+        bot.sendMessage(chat_id, "Siz avval ro'yxatdan o'tgansiz!")
     }
 
 });
